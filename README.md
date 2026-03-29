@@ -34,7 +34,7 @@ A desktop application built with Java and JavaFX to manage daily tasks and study
 
 | Feature | Status |
 |---|---|
-| Terminal menu + basic task CRUD | ⬜ |
+| Terminal menu + basic task CRUD | ✅ |
 | Task, Goal and StudySession classes | ⬜ |
 | Priority enum + inheritance + interfaces | ⬜ |
 | MVC architecture | ⬜ |
@@ -91,7 +91,7 @@ Aplicação desktop construída com Java e JavaFX para gerenciar tarefas diária
 
 | Funcionalidade | Status |
 |---|---|
-| Menu no terminal + CRUD básico de tarefas | ⬜ |
+| Menu no terminal + CRUD básico de tarefas | ✅ |
 | Classes Task, Goal e StudySession | ⬜ |
 | Enum Priority + herança + interfaces | ⬜ |
 | Arquitetura MVC | ⬜ |
