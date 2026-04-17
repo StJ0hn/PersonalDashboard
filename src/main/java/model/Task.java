@@ -8,15 +8,17 @@ public class Task {
     private TaskStatus taskStatus;
     private TaskPriority taskPriority;
     private String category;
-    private LocalDate date;
+    private LocalDate dueDate;
+    private LocalDate completedAt;
 
-    public Task(String title, String description, TaskStatus taskStatus, TaskPriority taskPriority, String category, LocalDate date) {
+    public Task(String title, String description, TaskPriority taskPriority, String category, LocalDate dueDate) {
         this.title = title;
         this.description = description;
         this.taskStatus = TaskStatus.PENDING;
         this.taskPriority = taskPriority;
         this.category = category;
-        this.date = date;
+        this.dueDate = dueDate;
+        completedAt = null;
     }
 
     public String getTitle() {
@@ -59,11 +61,29 @@ public class Task {
         this.category = category;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void markAsCompleted(){
+        setTaskStatus(TaskStatus.COMPLETED);
+        completedAt = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", taskStatus=" + taskStatus +
+                ", taskPriority=" + taskPriority +
+                ", category='" + category + '\'' +
+                ", dueDate=" + dueDate +
+                ", completedAt=" + completedAt +
+                '}';
     }
 }
