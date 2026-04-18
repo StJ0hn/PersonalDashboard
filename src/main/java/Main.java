@@ -1,10 +1,12 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.StudySession;
 import model.Task;
 import model.Goal;
-import model.StudySession;
 import model.TaskPriority;
+
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -33,7 +35,6 @@ public class Main {
             }
             else {
                 System.out.print("Invalid option. Try again.");
-                continue;
             }
         }
         System.out.print("Provide a category for the task: ");
@@ -47,40 +48,104 @@ public class Main {
     }
 
     public static void createGoal() {
-        //TODO Pedir dados pro usuário -> instanciar Goal -> adicionar na lista 'goals'
+        System.out.print("Provide a title for the goal: ");
+        String title = sc.nextLine();
+        System.out.println("Provide an area of knowledge of the goal: ");
+        String areaOfKnowledge = sc.nextLine();
+        System.out.println("Enter a target number of hours for the goal: ");
+        int targetHours = Integer.parseInt(sc.nextLine());
+        System.out.println("Enter the deadline for achieving the goal (yyyy-MM-dd): ");
+        String input = sc.nextLine();
+        LocalDate deadline = LocalDate.parse(input);
+        Goal goal = new Goal(title, areaOfKnowledge, targetHours, deadline);
+        goals.add(goal);
+        System.out.println("Study goal created!");
     }
 
     public static void listAll() {
-        //TODO Fazer um for-each na lista de tasks e imprimir
-        //TODO Fazer um for-each na lista de goals e imprimir (aqui você já pode chamar o getProgressPercentage() para testar!)
+        for (Task task:tasks){
+            System.out.println(task);
+        }
+
+        for (Goal goal:goals){
+            System.out.println(goal);
+        }
     }
 
     public static void completeTask() {
-        //TODO Pedir o título -> buscar na lista 'tasks' -> se achar, chamar .markAsCompleted()
+        System.out.print("Enter the title of the task to be marked as completed: ");
+        String titleTask = sc.nextLine();
+        for (Task task:tasks){
+            if (task.getTitle().equals(titleTask)){
+                task.markAsCompleted();
+                System.out.println("The task: " + task.getTitle() + " was marked as completed!");
+            }
+        }
     }
 
     public static void registerStudySession() {
-        //TODO Implementação do UC09 (Veja a dica abaixo)
+        System.out.println("\n--- REGISTER STUDY SESSION ---");
+
+        if (goals.isEmpty()) {
+            System.out.println("No goals registered yet. Please create a goal first [Press 2].");
+            return; // return to end the method and return to main menu
+        }
+
+        System.out.print("Enter the title of the Goal: ");
+        String searchTitle = sc.nextLine();
+        boolean found = false;
+
+        for (Goal currentGoal : goals) {
+            if (currentGoal.getTitle().equalsIgnoreCase(searchTitle)) {
+                found = true;
+                System.out.print("Duration (in minutes): ");
+                int duration = Integer.parseInt(sc.nextLine());
+                System.out.print("Notes (optional): ");
+                String notes = sc.nextLine();
+                StudySession newSession = new StudySession(duration, notes);
+                currentGoal.addStudySession(newSession);
+
+                System.out.println("Study session registered successfully!");
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Goal not found. Please check the title and try again.");
+        }
     }
 
-    // 3. O Loop Principal
     public static void main(String[] args) {
         while (true) {
             System.out.println("=== PERSONAL DASHBOARD ===");
             System.out.println("[1] Create Task");
             System.out.println("[2] Create Goal");
-            System.out.println("[3] Registrar Sessão de Estudo");
-            System.out.println("[4] Listar Tudo");
-            System.out.println("[5] Concluir Tarefa");
-            System.out.println("[0] Sair");
+            System.out.println("[3] Register Study Session");
+            System.out.println("[4] List All");
+            System.out.println("[5] Finish Task");
+            System.out.println("[0] Exit");
 
-            //TODO Ler escolha e fazer os IFs/Switch para chamar os métodos acima
             System.out.print("Select Option: ");
             int option = Integer.parseInt(sc.nextLine());
             switch (option){
                 case 1:
                     createTask();
                     break;
+                case 2:
+                    createGoal();
+                    break;
+                case 3:
+                    registerStudySession();
+                    break;
+                case 4:
+                    listAll();
+                    break;
+                case 5:
+                    completeTask();
+                    break;
+                case 0:
+                    System.out.print("Ending System...");
+                    System.exit(0);
             }
         }
     }
