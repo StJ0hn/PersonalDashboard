@@ -43,4 +43,5 @@ git clone https://github.com/StJ0hn/personal-dashboard.git
 Main.java (A rotina de execução via terminal será atualizada para Maven/Gradle conforme a inserção do JavaFX).
 
 ## Desafios Técnicos e Aprendizados
-(Seção em construção. Será atualizada conforme as refatorações mais complexas do sistema, especialmente durante a transição do ambiente de terminal para a arquitetura MVC com interface gráfica).
+1. Projetar Casos de usos e fluxos alternativos de interação com o Menu
+2. Implementar lógica provisória de armazenamento de dados em Arrays e Arraylists
