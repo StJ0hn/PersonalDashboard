@@ -1,111 +1,46 @@
-# Personal Dashboard — Task & Study Manager
-
-A desktop application built with Java and JavaFX to manage daily tasks and study goals. Developed as a practical project alongside the [MOOC.fi Java Programming](https://java-programming.mooc.fi/) course — each new concept learned is applied directly to the project.
-
-## Technologies
-
-- Java 21
-- JavaFX
-- Git & GitHub
-
-## Features
-
-**Task Management**
-- Create, edit, complete and delete tasks
-- Priority levels: High, Medium, Low
-- Categories and deadline
-
-**Study Goals**
-- Create study goals with target hours
-- Log study sessions with duration and notes
-- Track progress per goal
-
-**Dashboard**
-- Total tasks: pending, completed and overdue
-- Study hours per area
-- Productivity streak indicator
-
-**Data**
-- Automatic save on close
-- Load data on startup
-- CSV export
-
-## Development Status
-
-| Feature | Status |
-|---|---|
-| Terminal menu + basic task CRUD | ✅ |
-| Task, Goal and StudySession classes | ⬜ |
-| Priority enum + inheritance + interfaces | ⬜ |
-| MVC architecture | ⬜ |
-| HashMap statistics + recursive search | ⬜ |
-| Stream API filters + custom exceptions | ⬜ |
-| JSON persistence + CSV export | ⬜ |
-| JavaFX graphical interface | ⬜ |
-| JUnit unit tests | ⬜ |
-
-## How to run
-
-```bash
-# Requirements: JDK 21+
-git clone https://github.com/StJ0hn/personal-dashboard
-cd personal-dashboard
-# Open in IntelliJ IDEA and run Main.java
-```
-
----
-
 # Personal Dashboard — Gerenciador de Tarefas e Estudos
 
-Aplicação desktop construída com Java e JavaFX para gerenciar tarefas diárias e metas de estudo. Desenvolvida como projeto prático junto ao curso [MOOC.fi Java Programming](https://java-programming.mooc.fi/) — cada novo conceito aprendido é aplicado diretamente no projeto.
+> **Status:** Em desenvolvimento ativo (Iteração contínua em paralelo ao MOOC.fi)
 
-## 🛠️ Tecnologias
+Aplicação desktop construída para o gerenciamento de tarefas diárias e metas de estudo. 
 
-- Java 21
-- JavaFX
-- Git & GitHub
+## Objetivo
+O projeto atua como um laboratório prático iterativo associado ao curso Java Programming da Universidade de Helsinque. A proposta arquitetural é evoluir o software progressivamente: iniciando como uma aplicação simples de terminal e escalando para uma interface gráfica estruturada, garantindo que cada novo conceito da linguagem (como Stream API, persistência em arquivos e MVC) seja fixado através da implementação real.
 
-## Funcionalidades
+## Stack Tecnológico
+* Java 21
+* JavaFX
+* Git & GitHub
 
-**Gerenciamento de Tarefas**
-- Criar, editar, concluir e excluir tarefas
-- Níveis de prioridade: Alta, Média, Baixa
-- Categorias e prazo
+## Arquitetura e Funcionalidades Principais
+O sistema está sendo desenhado para suportar três pilares principais de gerenciamento:
+* Gerenciamento de Tarefas: Operações de CRUD com níveis de prioridade, categorização e controle de prazos.
+* Metas de Estudo: Definição de horas-alvo e registro detalhado de sessões.
+* Analytics (Dashboard): Processamento de dados em memória para exibição de estatísticas (horas por área, tarefas pendentes/concluídas e streaks de produtividade).
+* Persistência de Dados: Salvamento do estado da aplicação com exportação para formato CSV.
 
-**Metas de Estudo**
-- Criar metas de estudo com horas-alvo
-- Registrar sessões de estudo com duração e anotações
-- Acompanhar progresso por meta
+## Roadmap e Status de Desenvolvimento
+O avanço do projeto acompanha os módulos do curso.
 
-**Dashboard**
-- Total de tarefas: pendentes, concluídas e atrasadas
-- Horas de estudo por área
-- Indicador de streak de produtividade
+- [x] Menu no terminal e CRUD básico de tarefas.
+- [x] Modelagem das classes de domínio (Task, Goal, StudySession).
+- [x] Aplicação de herança, interfaces e Enums (Priority).
+- [ ] Estruturação em arquitetura MVC.
+- [ ] Geração de estatísticas (HashMap e busca recursiva).
+- [ ] Refatoração e filtragem de dados com Stream API e tratamento de exceções.
+- [ ] Implementação de persistência em arquivos (JSON e CSV export).
+- [ ] Desenvolvimento da interface gráfica utilizando JavaFX.
+- [ ] Cobertura de testes unitários com JUnit.
 
-**Dados**
-- Salvamento automático ao fechar
-- Carregamento de dados ao iniciar
-- Exportação para CSV
+## Como Executar Localmente
 
-## Status de Desenvolvimento
+1. Clone o repositório:
+git clone https://github.com/StJ0hn/personal-dashboard.git
 
-| Funcionalidade | Status |
-|---|---|
-| Menu no terminal + CRUD básico de tarefas | ✅ |
-| Classes Task, Goal e StudySession | ⬜ |
-| Enum Priority + herança + interfaces | ⬜ |
-| Arquitetura MVC | ⬜ |
-| Estatísticas com HashMap + busca recursiva | ⬜ |
-| Filtros com Stream API + exceções customizadas | ⬜ |
-| Persistência JSON + exportação CSV | ⬜ |
-| Interface gráfica com JavaFX | ⬜ |
-| Testes unitários com JUnit | ⬜ |
+2. Acesse a pasta do projeto e abra em sua IDE de preferência (ex: IntelliJ IDEA).
 
-## Como executar
+3. Compile e execute a classe principal:
+Main.java (A rotina de execução via terminal será atualizada para Maven/Gradle conforme a inserção do JavaFX).
 
-```bash
-# Requisitos: JDK 21+
-git clone https://github.com/StJ0hn/personal-dashboard
-cd personal-dashboard
-# Abrir no IntelliJ IDEA e executar Main.java
-```
+## Desafios Técnicos e Aprendizados
+(Seção em construção. Será atualizada conforme as refatorações mais complexas do sistema, especialmente durante a transição do ambiente de terminal para a arquitetura MVC com interface gráfica).
