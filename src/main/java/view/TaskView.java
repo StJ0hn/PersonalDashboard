@@ -25,6 +25,7 @@ public class TaskView {
             System.out.println("[2] - LIST ALL TASKS");
             System.out.println("[3] - MARK TASK AS 'COMPLETED'");
             System.out.println("[0] - LEAVE TO MAIN MENU");
+            System.out.print("Choice: ");
             int option = Integer.parseInt(sc.nextLine());
             switch (option) {
                 case 1:
