@@ -14,7 +14,6 @@ public class Main {
     static ArrayList<Goal> goals = new ArrayList<>();
 
     public static void createTask() {
-        //TODO Pedir dados pro usuário -> instanciar Task -> adicionar na lista 'tasks'
         System.out.print("Provide a title for the task: ");
         String title = sc.nextLine();
         System.out.print("Provide a description for the task: ");
