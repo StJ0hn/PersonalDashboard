@@ -2,6 +2,7 @@ package controller;
 
 import model.Task;
 import model.TaskPriority;
+import model.TaskStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class TaskController {
     public boolean completeTask(String taskName){
         for (Task task : tasks){
             if (task.getTitle().equalsIgnoreCase(taskName)){
+                task.setTaskStatus(TaskStatus.COMPLETED);
                 return true;
             }
         }
