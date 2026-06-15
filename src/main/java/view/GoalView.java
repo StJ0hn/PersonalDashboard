@@ -2,6 +2,8 @@ package view;
 
 import controller.GoalController;
 import model.Goal;
+import model.Task;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -91,8 +93,11 @@ public class GoalView {
             System.out.println("No goals found.");
             return;
         }
+        System.out.printf("%-20s | %-50s | %-15s | %-10s%n", "TITLE", "AREA OF KNOWLEDGE" ,"TARGET MINUTES", "DEADLINE");
+        System.out.println("-".repeat(150));
         for (Goal goal : currentGoals) {
-            System.out.println(goal);
+            System.out.printf("%-20s | %-50S |%-15s | %-10s%n", goal.getTitle(), goal.getAreaOfKnowledge(), goal.getTargetMinutes(), goal.getDeadline());
         }
+        System.out.printf("-".repeat(150));
     }
 }
