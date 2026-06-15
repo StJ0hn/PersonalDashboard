@@ -77,9 +77,12 @@ public class TaskView {
             System.out.println("No tasks found.");
             return;
         }
+        System.out.printf("%-20s | %-50s | %-15s | %-10s | %-10s%n", "TITLE", "DESCRIPTION" ,"CATEGORY", "PRIORITY", "DEADLINE", "STATUS");
+        System.out.println("-".repeat(150));
         for (Task task : currentTasks){
-            System.out.println(task);
+            System.out.printf("%-20s | %-50S |%-15s | %-10s | %-10s%n", task.getTitle(), task.getDescription() ,task.getCategory(), task.getTaskPriority(), task.getDueDate(), task.getTaskStatus());
         }
+        System.out.printf("-".repeat(150));
     }
 
     private void completeTaskUI(){
