@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import static util.InputUtils.readIntegerNumber;
+import static util.InputUtils.*;
 
 public class GoalView {
     private Scanner sc;
@@ -42,23 +42,19 @@ public class GoalView {
                 case 0:
                     return; // Volta para o menu principal
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("Invalid option. Try again.");
             }
         }
     }
 
     private void createGoalUI() {
-        System.out.print("Provide a title for the goal: ");
-        String title = sc.nextLine();
+        String title = readRequiredString(this.sc, "Enter the title of the Goal: ");
 
-        System.out.print("Provide an area of knowledge: ");
-        String area = sc.nextLine();
+        String area = readRequiredString(this.sc, "Provide an area of knowledge: ");
 
-        System.out.print("Enter a target number of hours: ");
-        int hours = Integer.parseInt(sc.nextLine());
+        int hours = readIntegerNumber(this.sc, "Enter a target number of hours: ");
 
-        System.out.print("Enter the deadline (yyyy-MM-dd): ");
-        LocalDate deadline = LocalDate.parse(sc.nextLine());
+        LocalDate deadline = readDate(this.sc, "Enter the deadline (yyyy-MM-dd): ");
 
         controller.addGoal(title, area, hours, deadline);
         System.out.println("Study goal created successfully!");
@@ -71,11 +67,9 @@ public class GoalView {
             return;
         }
 
-        System.out.print("Enter the title of the Goal: ");
-        String goalTitle = sc.nextLine();
+        String goalTitle = readRequiredString(this.sc, "Enter the title of the Goal: ");
 
-        System.out.print("Duration (in minutes): ");
-        int duration = Integer.parseInt(sc.nextLine());
+        int duration = readIntegerNumber(this.sc,"Duration (in minutes): ");
 
         System.out.print("Notes (optional): ");
         String notes = sc.nextLine();

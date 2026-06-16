@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import static util.InputUtils.readIntegerNumber;
+import static util.InputUtils.*;
 
 
 public class TaskView {
@@ -45,8 +45,7 @@ public class TaskView {
         }
     }
     private void createTaskUI(){
-        System.out.print("Provide a title for the task: ");
-        String title = sc.nextLine();
+        String title = readRequiredString(this.sc, "Provide a title for the task: ");
 
         System.out.println("Provide a description for the task: ");
         String description = sc.nextLine();
@@ -54,18 +53,16 @@ public class TaskView {
         System.out.print("Select priority [1 - High] [2 - Medium] [3 - Low]: ");
         TaskPriority priority = null;
         while (priority == null) {
-            int optionPriority = Integer.parseInt(sc.nextLine());
+            int optionPriority = readIntegerNumber(this.sc, "Select priority [1 - High] [2 - Medium] [3 - Low]: ");
             if (optionPriority == 1) priority = TaskPriority.HIGH;
             else if (optionPriority == 2) priority = TaskPriority.MEDIUM;
             else if (optionPriority == 3) priority = TaskPriority.LOW;
             else System.out.print("Invalid option. Try again: ");
         }
 
-        System.out.print("Provide a category for the task: ");
-        String category = sc.nextLine();
+        String category = readRequiredString(this.sc, "Provide a category for the task: ");
 
-        System.out.print("Enter the task expiration date (yyyy-MM-dd): ");
-        LocalDate dueDate = LocalDate.parse(sc.nextLine());
+        LocalDate dueDate = readDate(this.sc, "Enter the task expiration date (yyyy-MM-dd): ");
 
         taskController.addTasks(title, description, priority, category, dueDate);
         System.out.println("Task added successfully!");
@@ -86,8 +83,7 @@ public class TaskView {
     }
 
     private void completeTaskUI(){
-        System.out.println("Enter the title of the task to be marked as completed: ");
-        String titleTask = sc.nextLine();
+        String titleTask = readRequiredString(this.sc, "Enter the title of the task to be marked as completed: ");
         boolean success = taskController.completeTask(titleTask);
 
         if (success){
