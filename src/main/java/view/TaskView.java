@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import static util.InputUtils.readIntegerNumber;
 
 
 public class TaskView {
@@ -25,8 +26,7 @@ public class TaskView {
             System.out.println("[2] - LIST ALL TASKS");
             System.out.println("[3] - MARK TASK AS 'COMPLETED'");
             System.out.println("[0] - LEAVE TO MAIN MENU");
-            System.out.print("Choice: ");
-            int option = Integer.parseInt(sc.nextLine());
+            int option = readIntegerNumber(this.sc, "Choice: ");
             switch (option) {
                 case 1:
                     createTaskUI();

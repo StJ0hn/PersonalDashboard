@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import static util.InputUtils.readIntegerNumber;
+
 public class GoalView {
     private Scanner sc;
     private GoalController controller;
@@ -24,9 +26,8 @@ public class GoalView {
             System.out.println("[2] REGISTER STUDY SESSION");
             System.out.println("[3] VISUALIZE PROGRESS");
             System.out.println("[0] LEAVE TO MAIN MENU");
-            System.out.print("Choice: ");
 
-            int option = Integer.parseInt(sc.nextLine());
+            int option = readIntegerNumber(this.sc, "Choice: ");
 
             switch (option) {
                 case 1:

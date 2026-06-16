@@ -3,6 +3,8 @@ package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static util.InputUtils.readIntegerNumber;
+
 public class MainView {
     private Scanner scanner;
     private TaskView taskView;
@@ -14,17 +16,6 @@ public class MainView {
         this.goalView = new GoalView(this.scanner);
     }
 
-    public int readIntegerNumber(String message){
-        while (true){
-            try {
-                System.out.print(message);
-                int number = Integer.parseInt(scanner.nextLine());
-                return number;
-            } catch (NumberFormatException numberFormatException) {
-                System.out.println("Invalid data input. Try again.");
-            }
-        }
-    }
 
     public void start() {
         while (true) {
@@ -33,7 +24,7 @@ public class MainView {
             System.out.println("[2] MANAGE STUDY GOALS");
             System.out.println("[0] END SYSTEM");
 
-            int option = readIntegerNumber("Choice: ");
+            int option = readIntegerNumber(this.scanner, "Choice: ");
 
             switch (option) {
                 case 1:
