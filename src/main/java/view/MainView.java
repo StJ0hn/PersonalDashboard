@@ -32,7 +32,6 @@ public class MainView {
             System.out.println("[1] MANAGE TASKS");
             System.out.println("[2] MANAGE STUDY GOALS");
             System.out.println("[0] END SYSTEM");
-            System.out.print("Choice: ");
 
             int option = readIntegerNumber("Choice: ");
 
