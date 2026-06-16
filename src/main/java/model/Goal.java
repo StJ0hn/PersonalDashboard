@@ -50,8 +50,9 @@ public class Goal {
         return sum;
     }
 
-    public double getProgressPercentage(){
-        return (getAccumulatedMinutes() / (double) targetMinutes ) * 100;
+    public int getRemainingMinutes() {
+        int remaining = targetMinutes - getAccumulatedMinutes();
+        return Math.max(0, remaining);
     }
 
     @Override
