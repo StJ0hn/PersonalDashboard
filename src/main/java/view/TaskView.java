@@ -89,5 +89,8 @@ public class TaskView {
         if (success){
             System.out.println("The task: " + titleTask + " was marked as completed!");
         }
+        else {
+            System.out.println("Task not found! Please check the title.");
+        }
     }
 }
