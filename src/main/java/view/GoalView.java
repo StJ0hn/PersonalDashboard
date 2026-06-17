@@ -53,7 +53,7 @@ public class GoalView {
 
         int hours = readIntegerNumber(this.sc, "Enter a target number of hours: ");
 
-        LocalDate deadline = readDate(this.sc, "Enter the deadline (yyyy-MM-dd): ");
+        LocalDate deadline = readFutureDate(this.sc, "Enter the deadline (yyyy-MM-dd): ");
 
         controller.addGoal(title, area, hours, deadline);
         System.out.println("Study goal created successfully!");

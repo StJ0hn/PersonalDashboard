@@ -62,7 +62,7 @@ public class TaskView {
 
         String category = readRequiredString(this.sc, "Provide a category for the task: ");
 
-        LocalDate dueDate = readDate(this.sc, "Enter the task expiration date (yyyy-MM-dd): ");
+        LocalDate dueDate = readFutureDate(this.sc, "Enter the task expiration date (yyyy-MM-dd): ");
 
         taskController.addTasks(title, description, priority, category, dueDate);
         System.out.println("Task added successfully!");
@@ -74,10 +74,10 @@ public class TaskView {
             System.out.println("No tasks found.");
             return;
         }
-        System.out.printf("%-20s | %-50s | %-15s | %-10s | %-10s%n", "TITLE", "DESCRIPTION" ,"CATEGORY", "PRIORITY", "DEADLINE", "STATUS");
+        System.out.printf("%-20s | %-50s | %-15s | %-10s | %-10s | %-15s%n", "TITLE", "DESCRIPTION" ,"CATEGORY", "PRIORITY", "DEADLINE", "STATUS");
         System.out.println("-".repeat(150));
         for (Task task : currentTasks){
-            System.out.printf("%-20s | %-50S |%-15s | %-10s | %-10s%n", task.getTitle(), task.getDescription() ,task.getCategory(), task.getTaskPriority(), task.getDueDate(), task.getTaskStatus());
+            System.out.printf("%-20s | %-50S |%-15s | %-10s | %-10s | %-15s%n", task.getTitle(), task.getDescription() ,task.getCategory(), task.getTaskPriority(), task.getDueDate(), task.getTaskStatus());
         }
         System.out.printf("-".repeat(150));
     }

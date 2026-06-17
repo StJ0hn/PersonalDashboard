@@ -28,15 +28,20 @@ public class InputUtils {
         }
     }
 
-    public static LocalDate readDate(Scanner scanner, String message) {
+
+    public static LocalDate readFutureDate(Scanner scanner, String message){
         while (true){
             try {
                 System.out.println(message);
-                LocalDate date = LocalDate.parse(scanner.nextLine());
+                LocalDate date = LocalDate.parse(scanner.nextLine().trim());
+                if (date.isBefore(LocalDate.now())){
+                    System.out.println("The date cannot be in the past. Try again.");
+                    continue;
+                }
                 return date;
             }
             catch (DateTimeParseException dateTimeParseException){
-                System.out.println("Invalid date format. Try again with 'yyyy-mm-dd' format.");
+                System.out.println("Invalid date format. Try again with 'yyyy-MM-dd' format.");
             }
         }
     }
