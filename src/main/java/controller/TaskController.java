@@ -19,6 +19,10 @@ public class TaskController {
         tasks.add(task);
     }
 
+    public boolean deleteTask(String title){
+        return tasks.removeIf(task -> title.equalsIgnoreCase(task.getTitle()));
+    }
+
     public List<Task> listAllTasks(){
         return tasks;
     }

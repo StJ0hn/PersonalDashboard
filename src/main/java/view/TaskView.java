@@ -25,6 +25,7 @@ public class TaskView {
             System.out.println("[1] - CREATE TASK");
             System.out.println("[2] - LIST ALL TASKS");
             System.out.println("[3] - MARK TASK AS 'COMPLETED'");
+            System.out.println("[4] - DELETE A TASK");
             System.out.println("[0] - LEAVE TO MAIN MENU");
             int option = readIntegerNumber(this.sc, "Choice: ");
             switch (option) {
@@ -37,6 +38,8 @@ public class TaskView {
                 case 3:
                     completeTaskUI();
                     break;
+                case 4:
+                    removeTaskUI();
                 case 0:
                     return;
                 default:
@@ -80,6 +83,21 @@ public class TaskView {
             System.out.printf("%-20s | %-50S |%-15s | %-10s | %-10s | %-15s%n", task.getTitle(), task.getDescription() ,task.getCategory(), task.getTaskPriority(), task.getDueDate(), task.getTaskStatus());
         }
         System.out.printf("-".repeat(150));
+    }
+
+    private void removeTaskUI(){
+        if (taskController.listAllTasks().isEmpty()){
+            System.out.println("Has no task to remove.");
+            return;
+        }
+        String taskHasBeRemoved = readRequiredString(this.sc, "Enter the title of the task to be removed: ");
+        boolean success = taskController.deleteTask(taskHasBeRemoved);
+        if (success){
+            System.out.println("Task: " + taskHasBeRemoved + " has been removed.");
+        }
+        else {
+            System.out.println("Task not found!");
+        }
     }
 
     private void completeTaskUI(){
