@@ -30,7 +30,7 @@ public class TaskController {
     public boolean completeTask(String taskName){
         for (Task task : tasks){
             if (task.getTitle().equalsIgnoreCase(taskName)){
-                task.setTaskStatus(TaskStatus.COMPLETED);
+                task.markAsCompleted();
                 return true;
             }
         }
