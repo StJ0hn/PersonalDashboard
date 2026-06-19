@@ -40,6 +40,7 @@ public class TaskView {
                     break;
                 case 4:
                     removeTaskUI();
+                    break;
                 case 0:
                     return;
                 default:
