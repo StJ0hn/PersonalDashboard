@@ -1,5 +1,7 @@
 package util;
 
+import model.TaskPriority;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -17,9 +19,10 @@ public class InputUtils {
         }
     }
 
+
     public static String readRequiredString (Scanner scanner, String message){
         while (true){
-            System.out.println(message);
+            System.out.printaa(message);
             String input = scanner.nextLine().trim();
             if (!input.isEmpty()){
                 return input;
@@ -32,7 +35,7 @@ public class InputUtils {
     public static LocalDate readFutureDate(Scanner scanner, String message){
         while (true){
             try {
-                System.out.println(message);
+                System.out.print(message);
                 LocalDate date = LocalDate.parse(scanner.nextLine().trim());
                 if (date.isBefore(LocalDate.now())){
                     System.out.println("The date cannot be in the past. Try again.");
@@ -42,6 +45,27 @@ public class InputUtils {
             }
             catch (DateTimeParseException dateTimeParseException){
                 System.out.println("Invalid date format. Try again with 'yyyy-MM-dd' format.");
+            }
+        }
+    }
+
+    public static TaskPriority readTaskPriority(Scanner scanner, String message){
+        while (true){
+            int optionPriority = readIntegerNumber(scanner, message);
+            TaskPriority priority = null;
+            while (priority == null) {
+                if (optionPriority == 1) {
+                    return TaskPriority.HIGH;
+                }
+                else if (optionPriority == 2) {
+                    return TaskPriority.MEDIUM;
+                }
+                else if (optionPriority == 3) {
+                    return TaskPriority.LOW;
+                }
+                else {
+                    System.out.print("Invalid option. Try again: ");
+                }
             }
         }
     }

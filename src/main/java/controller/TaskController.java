@@ -27,6 +27,24 @@ public class TaskController {
         return tasks;
     }
 
+    public Task findTaskByTitle(String titleSearch){
+        for (Task task : tasks){
+            if (task.getTitle().equalsIgnoreCase(titleSearch)){
+                return task;
+            }
+        }
+        return null;
+    }
+
+    public boolean editTask(String titleFind, String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
+        Task task = findTaskByTitle(titleFind);
+        if (task == null){
+            return false;
+        }
+        task.updateTask(newDescription, newCategory, newDueDate, newPriority);
+        return true;
+    }
+
     public boolean completeTask(String taskName){
         for (Task task : tasks){
             if (task.getTitle().equalsIgnoreCase(taskName)){

@@ -26,6 +26,7 @@ public class TaskView {
             System.out.println("[2] - LIST ALL TASKS");
             System.out.println("[3] - MARK TASK AS 'COMPLETED'");
             System.out.println("[4] - DELETE A TASK");
+            System.out.println("[5] - UPDATE A TASK");
             System.out.println("[0] - LEAVE TO MAIN MENU");
             int option = readIntegerNumber(this.sc, "Choice: ");
             switch (option) {
@@ -41,6 +42,9 @@ public class TaskView {
                 case 4:
                     removeTaskUI();
                     break;
+                case 5:
+                    updateTaskUI();
+                    break;
                 case 0:
                     return;
                 default:
@@ -54,15 +58,7 @@ public class TaskView {
         System.out.println("Provide a description for the task: ");
         String description = sc.nextLine();
 
-        System.out.print("Select priority [1 - High] [2 - Medium] [3 - Low]: ");
-        TaskPriority priority = null;
-        while (priority == null) {
-            int optionPriority = readIntegerNumber(this.sc, "Select priority [1 - High] [2 - Medium] [3 - Low]: ");
-            if (optionPriority == 1) priority = TaskPriority.HIGH;
-            else if (optionPriority == 2) priority = TaskPriority.MEDIUM;
-            else if (optionPriority == 3) priority = TaskPriority.LOW;
-            else System.out.print("Invalid option. Try again: ");
-        }
+        TaskPriority priority = readTaskPriority(this.sc, "Select priority [1 - High] [2 - Medium] [3 - Low]: ");
 
         String category = readRequiredString(this.sc, "Provide a category for the task: ");
 
@@ -88,7 +84,7 @@ public class TaskView {
 
     private void removeTaskUI(){
         if (taskController.listAllTasks().isEmpty()){
-            System.out.println("Has no task to remove.");
+            System.out.println("Has no tasks to remove.");
             return;
         }
         String taskHasBeRemoved = readRequiredString(this.sc, "Enter the title of the task to be removed: ");
@@ -98,6 +94,29 @@ public class TaskView {
         }
         else {
             System.out.println("Task not found!");
+        }
+    }
+
+    private void updateTaskUI(){
+        if (taskController.listAllTasks().isEmpty()){
+            System.out.println("Has no tasks to update.");
+            return;
+        }
+        String searchTitle = readRequiredString(this.sc, "Type the title of task to be updated: ");
+        Task taskToEdit = taskController.findTaskByTitle(searchTitle);
+        if (taskToEdit == null){
+            System.out.println("Task not found.");
+        }
+        String newDescription = readRequiredString(this.sc, "Type new description: ");
+        String newCategory = readRequiredString(this.sc, "Type new category: ");
+        LocalDate newDueDate = readFutureDate(this.sc, "Type new due date: ");
+        TaskPriority newPriority = readTaskPriority(this.sc, "Type new priority of the task [1 - High] [2 - Medium] [3 - Low]: ");
+        boolean success = taskController.editTask(searchTitle, newDescription, newCategory, newDueDate, newPriority);
+        if (success){
+            System.out.println("Task successfully updated.");
+        }
+        else {
+            System.out.println("Unable to update the task. Please try again.");
         }
     }
 
