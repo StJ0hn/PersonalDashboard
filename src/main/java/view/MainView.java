@@ -1,6 +1,9 @@
 package view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static util.InputUtils.readIntegerNumber;
 
 public class MainView {
     private Scanner scanner;
@@ -13,15 +16,15 @@ public class MainView {
         this.goalView = new GoalView(this.scanner);
     }
 
+
     public void start() {
         while (true) {
             System.out.println("\n=== PERSONAL DASHBOARD ===");
             System.out.println("[1] MANAGE TASKS");
             System.out.println("[2] MANAGE STUDY GOALS");
             System.out.println("[0] END SYSTEM");
-            System.out.print("Choice: ");
 
-            int option = Integer.parseInt(scanner.nextLine());
+            int option = readIntegerNumber(this.scanner, "Choice: ");
 
             switch (option) {
                 case 1:

@@ -25,17 +25,11 @@ public class Task {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public TaskStatus getTaskStatus() {
         return taskStatus;
@@ -49,25 +43,22 @@ public class Task {
         return taskPriority;
     }
 
-    public void setTaskPriority(TaskPriority taskPriority) {
-        this.taskPriority = taskPriority;
-    }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void updateTask(String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
+        this.description = newDescription;
+        this.category = newCategory;
+        this.dueDate = newDueDate;
+        this.taskPriority = newPriority;
     }
 
     public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
 
     public void markAsCompleted(){
         setTaskStatus(TaskStatus.COMPLETED);
