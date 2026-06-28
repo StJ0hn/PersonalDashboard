@@ -22,7 +22,7 @@ public class InputUtils {
 
     public static String readRequiredString (Scanner scanner, String message){
         while (true){
-            System.out.printaa(message);
+            System.out.print(message);
             String input = scanner.nextLine().trim();
             if (!input.isEmpty()){
                 return input;
