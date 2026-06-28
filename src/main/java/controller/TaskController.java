@@ -36,6 +36,10 @@ public class TaskController {
         return null;
     }
 
+    public List<Task> searchTasksByTitle(String keyword){
+        return tasks.stream().filter(task -> task.getTitle().toLowerCase().contains(keyword.toLowerCase())).toList();
+    }
+
     public boolean editTask(String titleFind, String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
         Task task = findTaskByTitle(titleFind);
         if (task == null){

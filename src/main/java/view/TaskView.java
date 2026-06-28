@@ -27,6 +27,7 @@ public class TaskView {
             System.out.println("[3] - MARK TASK AS 'COMPLETED'");
             System.out.println("[4] - DELETE A TASK");
             System.out.println("[5] - UPDATE A TASK");
+            System.out.println("[6] - SEARCH TASK BY TITLE");
             System.out.println("[0] - LEAVE TO MAIN MENU");
             int option = readIntegerNumber(this.sc, "Choice: ");
             switch (option) {
@@ -44,6 +45,9 @@ public class TaskView {
                     break;
                 case 5:
                     updateTaskUI();
+                    break;
+                case 6:
+                    searchTaskUI();
                     break;
                 case 0:
                     return;
@@ -70,16 +74,23 @@ public class TaskView {
 
     private void listTaskUI(){
         List<Task> currentTasks = taskController.listAllTasks();
-        if (currentTasks.isEmpty()){
+        printTaskTable(currentTasks);
+    }
+
+    private void printTaskTable(List<Task> tasksToPrint) {
+        if (tasksToPrint.isEmpty()){
             System.out.println("No tasks found.");
             return;
         }
+
         System.out.printf("%-20s | %-50s | %-15s | %-10s | %-10s | %-15s%n", "TITLE", "DESCRIPTION" ,"CATEGORY", "PRIORITY", "DEADLINE", "STATUS");
         System.out.println("-".repeat(150));
-        for (Task task : currentTasks){
+
+        for (Task task : tasksToPrint){
             System.out.printf("%-20s | %-50S |%-15s | %-10s | %-10s | %-15s%n", task.getTitle(), task.getDescription() ,task.getCategory(), task.getTaskPriority(), task.getDueDate(), task.getTaskStatus());
         }
-        System.out.printf("-".repeat(150));
+
+        System.out.println("-".repeat(150));
     }
 
     private void removeTaskUI(){
@@ -118,6 +129,16 @@ public class TaskView {
         else {
             System.out.println("Unable to update the task. Please try again.");
         }
+    }
+
+    private void searchTaskUI(){
+        if (taskController.listAllTasks().isEmpty()){
+            System.out.println("Has no tasks to search.");
+            return;
+        }
+        String keyword = readRequiredString(this.sc, "Enter a snippet of the task to be searched for: ");
+        List<Task> foundTasks = taskController.searchTasksByTitle(keyword);
+        printTaskTable(foundTasks);
     }
 
     private void completeTaskUI(){
