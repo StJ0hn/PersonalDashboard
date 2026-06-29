@@ -117,8 +117,7 @@
 ## Fluxo Principal
 1. Usuário seleciona "Buscar Tarefa" no menu
 2. Sistema solicita título ou parte do título
-3. Usuário informa o termo de busca
-4. Sistema exibe as tarefas correspondentes
+3. Sistema exibe as tarefas correspondentes
 
 ## Fluxo Alternativo
 - 1. Nenhuma tarefa encontrada → Sistema exibe: "Tarefa não encontrada."

@@ -2,7 +2,6 @@ package controller;
 
 import model.Task;
 import model.TaskPriority;
-import model.TaskStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
