@@ -2,6 +2,7 @@ package controller;
 
 import model.Task;
 import model.TaskPriority;
+import model.TaskStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,6 +47,20 @@ public class TaskController {
         }
         task.updateTask(newDescription, newCategory, newDueDate, newPriority);
         return true;
+    }
+
+    public List<Task> filterTasksByStatus(TaskStatus status) {
+        return tasks.stream()
+                .filter(task -> task.getTaskStatus().equals(status))
+                .toList();
+    }
+
+    public List<Task> filterTasksByPriority(TaskPriority priority){
+        return tasks.stream().filter(task -> task.getTaskPriority().equals(priority)).toList();
+    }
+
+    public List<Task> filterTasksByCategory(String category){
+        return tasks.stream().filter(task -> task.getCategory().equalsIgnoreCase(category)).toList();
     }
 
     public boolean completeTask(String taskName){

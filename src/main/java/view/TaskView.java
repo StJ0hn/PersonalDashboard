@@ -3,6 +3,8 @@ package view;
 import controller.TaskController;
 import model.Task;
 import model.TaskPriority;
+import model.TaskStatus;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -28,6 +30,7 @@ public class TaskView {
             System.out.println("[4] - DELETE A TASK");
             System.out.println("[5] - UPDATE A TASK");
             System.out.println("[6] - SEARCH TASK BY TITLE");
+            System.out.println("[7] - FILTER TASK");
             System.out.println("[0] - LEAVE TO MAIN MENU");
             int option = readIntegerNumber(this.sc, "Choice: ");
             switch (option) {
@@ -48,6 +51,9 @@ public class TaskView {
                     break;
                 case 6:
                     searchTaskUI();
+                    break;
+                case 7:
+                    optionFilterUI();
                     break;
                 case 0:
                     return;
@@ -77,6 +83,7 @@ public class TaskView {
         printTaskTable(currentTasks);
     }
 
+    //Helper method to format table of tasks
     private void printTaskTable(List<Task> tasksToPrint) {
         if (tasksToPrint.isEmpty()){
             System.out.println("No tasks found.");
@@ -139,6 +146,34 @@ public class TaskView {
         String keyword = readRequiredString(this.sc, "Enter a snippet of the task to be searched for: ");
         List<Task> foundTasks = taskController.searchTasksByTitle(keyword);
         printTaskTable(foundTasks);
+    }
+
+    private void optionFilterUI(){
+        if (taskController.listAllTasks().isEmpty()){
+            System.out.println("Has no tasks to filter.");
+            return;
+        }
+        int option = readIntegerNumber(this.sc, "Filter by ([1] - STATUS, [2] - PRIORITY, 3 - CATEGORY): ");
+        if (option == 1){
+            int status = readIntegerNumber(this.sc, "Insert status ([1] - PENDING/ [2] - COMPLETED): ");
+            if (status == 1){
+                printTaskTable(taskController.filterTasksByStatus(TaskStatus.PENDING));
+            } else if (status == 2) {
+                printTaskTable(taskController.filterTasksByStatus(TaskStatus.COMPLETED));
+            }
+            else {
+                System.out.println("Invalid option.");
+            }
+        } else if (option == 2) {
+             TaskPriority priority = readTaskPriority(this.sc, "Insert priority ([1] - HIGH, [2] - MEDIUM, [3] - LOW): ");
+             printTaskTable(taskController.filterTasksByPriority(priority));
+        } else if (option == 3) {
+            String category = readRequiredString(this.sc, "Insert the category of task: ");
+            printTaskTable(taskController.filterTasksByCategory(category));
+        }
+        else {
+            System.out.println("Invalid option");
+        }
     }
 
     private void completeTaskUI(){
