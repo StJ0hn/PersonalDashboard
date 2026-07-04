@@ -1,5 +1,6 @@
 package controller;
 
+import exception.TaskNotFoundException;
 import model.Task;
 import model.TaskPriority;
 import model.TaskStatus;
@@ -28,12 +29,7 @@ public class TaskController {
     }
 
     public Task findTaskByTitle(String titleSearch){
-        for (Task task : tasks){
-            if (task.getTitle().equalsIgnoreCase(titleSearch)){
-                return task;
-            }
-        }
-        return null;
+        return tasks.stream().filter(task -> task.getTitle().equalsIgnoreCase(titleSearch)).findFirst().orElseThrow(() -> new TaskNotFoundException("Task not found."));
     }
 
     public List<Task> searchTasksByTitle(String keyword){
@@ -43,24 +39,36 @@ public class TaskController {
     public boolean editTask(String titleFind, String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
         Task task = findTaskByTitle(titleFind);
         if (task == null){
-            return false;
+            throw new TaskNotFoundException("Task not found.");
         }
         task.updateTask(newDescription, newCategory, newDueDate, newPriority);
         return true;
     }
 
     public List<Task> filterTasksByStatus(TaskStatus status) {
-        return tasks.stream()
+        List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getTaskStatus().equals(status))
                 .toList();
+        if (filteredTasks.isEmpty()){ //Deliberately duplicated until a stable abstraction emerges.
+            throw new TaskNotFoundException("No tasks found for the specified filter.");
+        }
+        return filteredTasks;
     }
 
     public List<Task> filterTasksByPriority(TaskPriority priority){
-        return tasks.stream().filter(task -> task.getTaskPriority().equals(priority)).toList();
+        List<Task> filteredTasks = tasks.stream().filter(task -> task.getTaskPriority().equals(priority)).toList();
+        if (filteredTasks.isEmpty()){ //Deliberately duplicated until a stable abstraction emerges.
+            throw new TaskNotFoundException("No tasks found for the specified filter.");
+        }
+        return filteredTasks;
     }
 
     public List<Task> filterTasksByCategory(String category){
-        return tasks.stream().filter(task -> task.getCategory().equalsIgnoreCase(category)).toList();
+        List<Task> filteredTasks = tasks.stream().filter(task -> task.getCategory().equalsIgnoreCase(category)).toList();
+        if (filteredTasks.isEmpty()){ //Deliberately duplicated until a stable abstraction emerges.
+            throw new TaskNotFoundException("No tasks found for the specified filter.");
+        }
+        return filteredTasks;
     }
 
     public boolean completeTask(String taskName){
@@ -70,6 +78,6 @@ public class TaskController {
                 return true;
             }
         }
-        return false;
+        throw new TaskNotFoundException("Task not found");
     }
 }
