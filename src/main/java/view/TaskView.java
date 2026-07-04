@@ -1,6 +1,7 @@
 package view;
 
 import controller.TaskController;
+import exception.TaskNotFoundException;
 import model.Task;
 import model.TaskPriority;
 import model.TaskStatus;
@@ -105,13 +106,13 @@ public class TaskView {
             System.out.println("Has no tasks to remove.");
             return;
         }
-        String taskHasBeRemoved = readRequiredString(this.sc, "Enter the title of the task to be removed: ");
-        boolean success = taskController.deleteTask(taskHasBeRemoved);
-        if (success){
-            System.out.println("Task: " + taskHasBeRemoved + " has been removed.");
+        try {
+            String taskHasBeRemoved = readRequiredString(this.sc, "Enter the title of the task to be removed: ");
+            taskController.deleteTask(taskHasBeRemoved);
+            System.out.println("Task removed successfully.");
         }
-        else {
-            System.out.println("Task not found!");
+        catch (TaskNotFoundException taskNotFoundException){
+            System.out.println(taskNotFoundException.getMessage());
         }
     }
 
@@ -120,21 +121,18 @@ public class TaskView {
             System.out.println("Has no tasks to update.");
             return;
         }
-        String searchTitle = readRequiredString(this.sc, "Type the title of task to be updated: ");
-        Task taskToEdit = taskController.findTaskByTitle(searchTitle);
-        if (taskToEdit == null){
-            System.out.println("Task not found.");
-        }
-        String newDescription = readRequiredString(this.sc, "Type new description: ");
-        String newCategory = readRequiredString(this.sc, "Type new category: ");
-        LocalDate newDueDate = readFutureDate(this.sc, "Type new due date: ");
-        TaskPriority newPriority = readTaskPriority(this.sc, "Type new priority of the task [1 - High] [2 - Medium] [3 - Low]: ");
-        boolean success = taskController.editTask(searchTitle, newDescription, newCategory, newDueDate, newPriority);
-        if (success){
+        try {
+            String searchTitle = readRequiredString(this.sc, "Type the title of task to be updated: ");
+            taskController.findTaskByTitle(searchTitle);
+            String newDescription = readRequiredString(this.sc, "Type new description: ");
+            String newCategory = readRequiredString(this.sc, "Type new category: ");
+            LocalDate newDueDate = readFutureDate(this.sc, "Type new due date: ");
+            TaskPriority newPriority = readTaskPriority(this.sc, "Type new priority of the task [1 - High] [2 - Medium] [3 - Low]: ");
+            taskController.editTask(searchTitle, newDescription, newCategory, newDueDate, newPriority);
             System.out.println("Task successfully updated.");
         }
-        else {
-            System.out.println("Unable to update the task. Please try again.");
+        catch (TaskNotFoundException taskNotFoundException){
+            System.out.println(taskNotFoundException.getMessage());
         }
     }
 
@@ -143,9 +141,14 @@ public class TaskView {
             System.out.println("Has no tasks to search.");
             return;
         }
-        String keyword = readRequiredString(this.sc, "Enter a snippet of the task to be searched for: ");
-        List<Task> foundTasks = taskController.searchTasksByTitle(keyword);
-        printTaskTable(foundTasks);
+        try {
+            String keyword = readRequiredString(this.sc, "Enter a snippet of the task to be searched for: ");
+            List<Task> foundTasks = taskController.searchTasksByTitle(keyword);
+            printTaskTable(foundTasks);
+        }
+        catch (TaskNotFoundException taskNotFoundException){
+            System.out.println(taskNotFoundException.getMessage());
+        }
     }
 
     private void optionFilterUI(){
@@ -153,38 +156,40 @@ public class TaskView {
             System.out.println("Has no tasks to filter.");
             return;
         }
-        int option = readIntegerNumber(this.sc, "Filter by ([1] - STATUS, [2] - PRIORITY, 3 - CATEGORY): ");
-        if (option == 1){
-            int status = readIntegerNumber(this.sc, "Insert status ([1] - PENDING/ [2] - COMPLETED): ");
-            if (status == 1){
-                printTaskTable(taskController.filterTasksByStatus(TaskStatus.PENDING));
-            } else if (status == 2) {
-                printTaskTable(taskController.filterTasksByStatus(TaskStatus.COMPLETED));
+        try {
+            int option = readIntegerNumber(this.sc, "Filter by ([1] - STATUS, [2] - PRIORITY, 3 - CATEGORY): ");
+            if (option == 1) {
+                int status = readIntegerNumber(this.sc, "Insert status ([1] - PENDING/ [2] - COMPLETED): ");
+                if (status == 1) {
+                    printTaskTable(taskController.filterTasksByStatus(TaskStatus.PENDING));
+                } else if (status == 2) {
+                    printTaskTable(taskController.filterTasksByStatus(TaskStatus.COMPLETED));
+                } else {
+                    System.out.println("Invalid option.");
+                }
+            } else if (option == 2) {
+                TaskPriority priority = readTaskPriority(this.sc, "Insert priority ([1] - HIGH, [2] - MEDIUM, [3] - LOW): ");
+                printTaskTable(taskController.filterTasksByPriority(priority));
+            } else if (option == 3) {
+                String category = readRequiredString(this.sc, "Insert the category of task: ");
+                printTaskTable(taskController.filterTasksByCategory(category));
+            } else {
+                System.out.println("Invalid option");
             }
-            else {
-                System.out.println("Invalid option.");
-            }
-        } else if (option == 2) {
-             TaskPriority priority = readTaskPriority(this.sc, "Insert priority ([1] - HIGH, [2] - MEDIUM, [3] - LOW): ");
-             printTaskTable(taskController.filterTasksByPriority(priority));
-        } else if (option == 3) {
-            String category = readRequiredString(this.sc, "Insert the category of task: ");
-            printTaskTable(taskController.filterTasksByCategory(category));
         }
-        else {
-            System.out.println("Invalid option");
+        catch (TaskNotFoundException taskNotFoundException){
+            System.out.println(taskNotFoundException.getMessage());
         }
     }
 
     private void completeTaskUI(){
-        String titleTask = readRequiredString(this.sc, "Enter the title of the task to be marked as completed: ");
-        boolean success = taskController.completeTask(titleTask);
-
-        if (success){
-            System.out.println("The task: " + titleTask + " was marked as completed!");
+        try {
+            String titleTask = readRequiredString(this.sc, "Enter the title of the task to be marked as completed: ");
+            taskController.completeTask(titleTask);
+            System.out.println("Task marked as Completed successfully.");
         }
-        else {
-            System.out.println("Task not found! Please check the title.");
+        catch (TaskNotFoundException taskNotFoundException){
+            System.out.println(taskNotFoundException.getMessage());
         }
     }
 }
