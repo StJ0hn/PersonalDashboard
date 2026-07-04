@@ -45,3 +45,4 @@ Main.java (A rotina de execução via terminal será atualizada para Maven/Gradl
 ## Desafios Técnicos e Aprendizados
 1. Projetar Casos de usos e fluxos alternativos de interação com o Menu
 2. Implementar lógica provisória de armazenamento de dados em Arrays e Arraylists
+3. Quais comportamentos devem se converter em abstrações e quais comportamentos devem se repetir, a partir de qual ponto se deve abstrair?
