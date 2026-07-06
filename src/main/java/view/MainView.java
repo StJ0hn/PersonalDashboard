@@ -1,6 +1,7 @@
 package view;
 
-import java.util.InputMismatchException;
+import controller.TaskController;
+
 import java.util.Scanner;
 
 import static util.InputUtils.readIntegerNumber;
@@ -9,10 +10,14 @@ public class MainView {
     private Scanner scanner;
     private TaskView taskView;
     private GoalView goalView;
+    private DashboardView dashboardView;
+    private TaskController taskController;
 
     public MainView() {
         this.scanner = new Scanner(System.in);
-        this.taskView = new TaskView(this.scanner);
+        this.taskController = new TaskController();
+        this.taskView = new TaskView(this.scanner, this.taskController);
+        this.dashboardView = new DashboardView(this.scanner, this.taskController);
         this.goalView = new GoalView(this.scanner);
     }
 
@@ -22,6 +27,7 @@ public class MainView {
             System.out.println("\n=== PERSONAL DASHBOARD ===");
             System.out.println("[1] MANAGE TASKS");
             System.out.println("[2] MANAGE STUDY GOALS");
+            System.out.println("[3] DASHBOARD");
             System.out.println("[0] END SYSTEM");
 
             int option = readIntegerNumber(this.scanner, "Choice: ");
@@ -32,6 +38,9 @@ public class MainView {
                     break;
                 case 2:
                     goalView.showGoalMenu();
+                    break;
+                case 3:
+                    dashboardView.showDashboardMenu();
                     break;
                 case 0:
                     System.out.println("Ending System...");
