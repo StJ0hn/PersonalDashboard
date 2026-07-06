@@ -17,9 +17,9 @@ public class TaskView {
     private Scanner sc;
     private TaskController taskController;
 
-    public TaskView (Scanner scanner){
+    public TaskView (Scanner scanner, TaskController taskController){
         this.sc = scanner;
-        taskController = new TaskController();
+        this.taskController = taskController;
     }
 
     public void showTaskMenu(){
