@@ -27,7 +27,7 @@ public class TaskJsonRepository {
         try (Writer writer = new FileWriter(FILE_PATH)){
 
         } catch (IOException ioException){
-            System.out.println("Erro at store tasks: " + ioException.getMessage());
+            System.out.println("Error at store tasks: " + ioException.getMessage());
         }
     }
 
