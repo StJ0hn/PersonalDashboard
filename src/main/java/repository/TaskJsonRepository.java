@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class TaskJsonRepository {
 
-    private static final String FILE_PATH = "tasks.json";
+    private static final String FILE_PATH = "src/main/java/tasks.json";
     private Gson gson;
 
     public TaskJsonRepository(){
@@ -25,7 +25,7 @@ public class TaskJsonRepository {
 
     public void saveTasks(List<Task> tasks) {
         try (Writer writer = new FileWriter(FILE_PATH)){
-
+            gson.toJson(tasks, writer);
         } catch (IOException ioException){
             System.out.println("Error at store tasks: " + ioException.getMessage());
         }

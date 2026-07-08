@@ -4,24 +4,33 @@ import exception.TaskNotFoundException;
 import model.Task;
 import model.TaskPriority;
 import model.TaskStatus;
+import repository.TaskJsonRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskController {
-    private ArrayList<Task> tasks;
+    private List<Task> tasks;
+    private TaskJsonRepository repository;
+
     public TaskController (){
-        tasks = new ArrayList<>();
+        this.repository = new TaskJsonRepository();
+        this.tasks = repository.loadTasks();
     }
 
     public void addTasks(String title, String description, TaskPriority priority, String category, LocalDate dueDate){
         Task task = new Task(title, description, priority, category, dueDate);
-        tasks.add(task);
+        this.tasks.add(task);
+        repository.saveTasks(this.tasks);
     }
 
-    public boolean deleteTask(String title){
-        return tasks.removeIf(task -> title.equalsIgnoreCase(task.getTitle()));
+    public void deleteTask(String title){
+        boolean wasRemoved = tasks.removeIf(task -> title.equalsIgnoreCase(task.getTitle()));
+
+        if (!wasRemoved) {
+            throw new TaskNotFoundException("Task not found.");
+        }
+        repository.saveTasks(this.tasks);
     }
 
     public List<Task> listAllTasks(){
@@ -36,13 +45,10 @@ public class TaskController {
         return tasks.stream().filter(task -> task.getTitle().toLowerCase().contains(keyword.toLowerCase())).toList();
     }
 
-    public boolean editTask(String titleFind, String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
+    public void editTask(String titleFind, String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
         Task task = findTaskByTitle(titleFind);
-        if (task == null){
-            throw new TaskNotFoundException("Task not found.");
-        }
         task.updateTask(newDescription, newCategory, newDueDate, newPriority);
-        return true;
+        repository.saveTasks(this.tasks);
     }
 
     public List<Task> filterTasksByStatus(TaskStatus status) {
@@ -75,6 +81,7 @@ public class TaskController {
         for (Task task : tasks){
             if (task.getTitle().equalsIgnoreCase(taskName)){
                 task.markAsCompleted();
+                repository.saveTasks(tasks);
                 return true;
             }
         }
