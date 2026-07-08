@@ -26,7 +26,7 @@ O avanço do projeto acompanha os módulos do curso.
 - [x] Modelagem das classes de domínio (Task, Goal, StudySession).
 - [x] Aplicação de herança, interfaces e Enums (Priority).
 - [x] Estruturação em arquitetura MVC.
-- [ ] Geração de estatísticas (HashMap e busca recursiva).
+- [x] Geração de estatísticas (HashMap e busca recursiva).
 - [x] Refatoração e filtragem de dados com Stream API e tratamento de exceções.
 - [ ] Implementação de persistência em arquivos (JSON e CSV export).
 - [ ] Desenvolvimento da interface gráfica utilizando JavaFX.
