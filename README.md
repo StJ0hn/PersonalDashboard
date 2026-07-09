@@ -28,7 +28,7 @@ O avanço do projeto acompanha os módulos do curso.
 - [x] Estruturação em arquitetura MVC.
 - [x] Geração de estatísticas (HashMap e busca recursiva).
 - [x] Refatoração e filtragem de dados com Stream API e tratamento de exceções.
-- [ ] Implementação de persistência em arquivos (JSON e CSV export).
+- [x] Implementação de persistência em arquivos (JSON e CSV export).
 - [ ] Desenvolvimento da interface gráfica utilizando JavaFX.
 - [ ] Cobertura de testes unitários com JUnit.
 
