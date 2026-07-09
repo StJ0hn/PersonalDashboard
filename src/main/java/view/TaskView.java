@@ -5,6 +5,7 @@ import exception.TaskNotFoundException;
 import model.Task;
 import model.TaskPriority;
 import model.TaskStatus;
+import util.CsvExporter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,6 +33,7 @@ public class TaskView {
             System.out.println("[5] - UPDATE A TASK");
             System.out.println("[6] - SEARCH TASK BY TITLE");
             System.out.println("[7] - FILTER TASK");
+            System.out.println("[8] - EXPORT TO CSV");
             System.out.println("[0] - LEAVE TO MAIN MENU");
             int option = readIntegerNumber(this.sc, "Choice: ");
             switch (option) {
@@ -55,6 +57,9 @@ public class TaskView {
                     break;
                 case 7:
                     optionFilterUI();
+                    break;
+                case 8:
+                    exportCsvUI();
                     break;
                 case 0:
                     return;
@@ -192,5 +197,16 @@ public class TaskView {
             System.out.println(taskNotFoundException.getMessage());
         }
     }
-}
 
+    private void exportCsvUI(){
+        List<Task> allTasks = taskController.listAllTasks();
+        if (allTasks.isEmpty()) {
+            System.out.println("There are no tasks to export.");
+            return;
+        }
+
+        String fileName = readRequiredString(this.sc, "Enter the name for the CSV file (e.g., 'my_tasks'): ");
+        util.CsvExporter.exportTasksToCSV(allTasks, fileName);
+        System.out.println("CSV file generated successfully! Look for '" + fileName + ".csv' in your project folder.");
+    }
+}

@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskJsonRepository {
-
-    private static final String FILE_PATH = "src/main/java/tasks.json";
+    private static final String FILE_PATH = "data/tasks.json";
     private Gson gson;
 
     public TaskJsonRepository(){
+        java.io.File directory = new java.io.File("data");
+        if (!directory.exists()) {
+            directory.mkdir(); //cria pasta física 'data' na raiz do projeto
+        }
+
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) -> new JsonPrimitive(src.toString()))
                 .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) -> LocalDate.parse(json.getAsString()))
