@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskJsonRepository {
-
-    private static final String FILE_PATH = "tasks.json";
+    private static final String FILE_PATH = "data/tasks.json";
     private Gson gson;
 
     public TaskJsonRepository(){
+        java.io.File directory = new java.io.File("data");
+        if (!directory.exists()) {
+            directory.mkdir(); //cria pasta física 'data' na raiz do projeto
+        }
+
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) -> new JsonPrimitive(src.toString()))
                 .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) -> LocalDate.parse(json.getAsString()))
@@ -25,9 +29,9 @@ public class TaskJsonRepository {
 
     public void saveTasks(List<Task> tasks) {
         try (Writer writer = new FileWriter(FILE_PATH)){
-
+            gson.toJson(tasks, writer);
         } catch (IOException ioException){
-            System.out.println("Erro at store tasks: " + ioException.getMessage());
+            System.out.println("Error at store tasks: " + ioException.getMessage());
         }
     }
 
