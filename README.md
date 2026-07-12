@@ -1,6 +1,6 @@
 # Personal Dashboard — Gerenciador de Tarefas e Estudos
 
-> **Status:** Em desenvolvimento ativo (Iteração contínua em paralelo ao MOOC.fi)
+> **Status:** Em desenvolvimento ativo 
 
 Aplicação desktop construída para o gerenciamento de tarefas diárias e metas de estudo. 
 
