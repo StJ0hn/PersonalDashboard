@@ -1,5 +1,6 @@
 package view;
 
+import controller.GoalController;
 import controller.TaskController;
 
 import java.util.Scanner;
@@ -12,12 +13,14 @@ public class MainView {
     private GoalView goalView;
     private DashboardView dashboardView;
     private TaskController taskController;
+    private GoalController goalController;
 
     public MainView() {
         this.scanner = new Scanner(System.in);
         this.taskController = new TaskController();
+        this.goalController = new GoalController();
         this.taskView = new TaskView(this.scanner, this.taskController);
-        this.dashboardView = new DashboardView(this.scanner, this.taskController);
+        this.dashboardView = new DashboardView(this.scanner, this.taskController, this.goalController);
         this.goalView = new GoalView(this.scanner);
     }
 

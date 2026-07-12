@@ -55,6 +55,11 @@ public class Goal {
         return Math.max(0, remaining);
     }
 
+    public double getProgressPercentage() {
+        if (targetMinutes == 0) return 0.0;
+        return ((double) getAccumulatedMinutes() / targetMinutes) * 100.0;
+    }
+
     @Override
     public String toString() {
         return "Goal{" +

@@ -4,6 +4,25 @@
     "areaOfKnowledge": "Tests",
     "targetMinutes": 120,
     "deadline": "2029-09-09",
-    "historyOfSessions": []
+    "historyOfSessions": [
+      {
+        "durationInMinutes": 100,
+        "date": "2026-07-12",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "title": "Test 2",
+    "areaOfKnowledge": "Tests",
+    "targetMinutes": 120,
+    "deadline": "2029-09-09",
+    "historyOfSessions": [
+      {
+        "durationInMinutes": 100,
+        "date": "2026-07-12",
+        "notes": ""
+      }
+    ]
   }
 ]
