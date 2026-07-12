@@ -48,6 +48,19 @@ public class Task {
         return category;
     }
 
+    public LocalDate getCompletedAt(){
+        return completedAt;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void markAsCompleted(){
+        setTaskStatus(TaskStatus.COMPLETED);
+        completedAt = LocalDate.now();
+    }
+
     public void updateTask(String newDescription, String newCategory, LocalDate newDueDate, TaskPriority newPriority){
         this.description = newDescription;
         this.category = newCategory;
@@ -55,15 +68,6 @@ public class Task {
         this.taskPriority = newPriority;
     }
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-
-    public void markAsCompleted(){
-        setTaskStatus(TaskStatus.COMPLETED);
-        completedAt = LocalDate.now();
-    }
 
     @Override
     public String toString() {
