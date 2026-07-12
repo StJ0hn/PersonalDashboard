@@ -21,16 +21,10 @@ public class StudySession {
         return date;
     }
 
-    public String getNotes() {
-        return notes;
-    }
 
     @Override
     public String toString() {
-        return "StudySession{" +
-                "durationInMinutes=" + durationInMinutes +
-                ", date=" + date +
-                ", notes='" + notes + '\'' +
-                '}';
+        String displayNotes = (notes == null || notes.isBlank()) ? "N/A" : notes; //ternary operator to format notes
+        return String.format("[%s] %d min | Notes: %s", date, durationInMinutes, displayNotes);
     }
 }
