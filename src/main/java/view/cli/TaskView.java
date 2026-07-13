@@ -1,11 +1,10 @@
-package view;
+package view.cli;
 
 import controller.TaskController;
 import exception.TaskNotFoundException;
 import model.Task;
 import model.TaskPriority;
 import model.TaskStatus;
-import util.CsvExporter;
 
 import java.time.LocalDate;
 import java.util.List;

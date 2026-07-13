@@ -1,4 +1,4 @@
-package view;
+package view.cli;
 
 import controller.GoalController;
 import controller.TaskController;

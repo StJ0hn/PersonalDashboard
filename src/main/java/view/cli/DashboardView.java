@@ -1,4 +1,4 @@
-package view;
+package view.cli;
 
 import controller.DashboardController;
 import controller.GoalController;
