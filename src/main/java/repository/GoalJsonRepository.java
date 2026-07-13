@@ -3,7 +3,6 @@ package repository;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import model.Goal;
-import model.Task;
 
 import java.io.*;
 import java.lang.reflect.Type;
