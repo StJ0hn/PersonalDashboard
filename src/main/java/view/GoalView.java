@@ -39,7 +39,7 @@ public class GoalView {
                     listGoalsUI();
                     break;
                 case 0:
-                    return; // Volta para o menu principal
+                    return;
                 default:
                     System.out.println("Invalid option. Try again.");
             }
