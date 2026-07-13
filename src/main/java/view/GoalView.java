@@ -84,14 +84,46 @@ public class GoalView {
     private void listGoalsUI() {
         List<Goal> currentGoals = controller.listAllGoals();
         if (currentGoals.isEmpty()) {
-            System.out.println("No goals found.");
+            System.out.println("No goals registered yet.");
             return;
         }
-        System.out.printf("%-20s | %-50s | %-15s | %-15s | %-10s%n", "TITLE", "AREA OF KNOWLEDGE" ,"TARGET MINUTES", "REMAINING(MINUTES)", "DEADLINE");
-        System.out.println("-".repeat(150));
-        for (Goal goal : currentGoals) {
-            System.out.printf("%-20s | %-50S |%-15s | %-15s | %-10s%n", goal.getTitle(), goal.getAreaOfKnowledge(), goal.getTargetMinutes(), goal.getRemainingMinutes(), goal.getDeadline());
+
+        System.out.print("Enter goal title or part of it: ");
+        String searchTerm = sc.nextLine().trim();
+
+        List<Goal> foundGoals = currentGoals.stream()
+                .filter(g -> g.getTitle().toLowerCase().contains(searchTerm.toLowerCase()))
+                .toList();
+
+        if (foundGoals.isEmpty()) {
+            System.out.println("Goal not found.");
+            return;
         }
-        System.out.printf("-".repeat(150));
+
+        System.out.printf("%-20s | %-30s | %-15s | %-15s | %-15s | %-10s | %-10s%n",
+                "TITLE", "AREA OF KNOWLEDGE", "TARGET(MIN)", "ACCUMULATED", "REMAINING(MIN)", "PROGRESS", "DEADLINE");
+        System.out.println("-".repeat(130));
+
+        for (Goal goal : foundGoals) {
+            double percentage = goal.getTargetMinutes() == 0 ? 0.0 : ((double) goal.getAccumulatedMinutes() / goal.getTargetMinutes()) * 100.0;
+            String progressStr = String.format("%.2f%%", percentage);
+
+            System.out.printf("%-20s | %-30S | %-15d | %-15d | %-15d | %-10s | %-10s%n",
+                    goal.getTitle(),
+                    goal.getAreaOfKnowledge(),
+                    goal.getTargetMinutes(),
+                    goal.getAccumulatedMinutes(),
+                    goal.getRemainingMinutes(),
+                    progressStr,
+                    goal.getDeadline());
+
+            if (goal.getHistoryOfSessions().isEmpty()) {
+                System.out.println("   -> No study sessions registered.");
+            } else {
+                System.out.println("   -> STUDY SESSIONS:");
+                goal.getHistoryOfSessions().forEach(session -> System.out.println("      " + session.toString()));
+            }
+            System.out.println("-".repeat(130));
+        }
     }
 }
