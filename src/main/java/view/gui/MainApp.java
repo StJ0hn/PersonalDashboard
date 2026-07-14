@@ -52,6 +52,9 @@ public class MainApp extends Application {
         DashboardPanel dashboardPanel = new DashboardPanel(dashboardController, taskController, goalController);
         root.setCenter(dashboardPanel.getView());
 
+        GoalPanel goalPanel = new GoalPanel(goalController);
+        btnGoals.setOnAction(e -> root.setCenter(goalPanel.getView()));
+
         btnDashboard.setOnAction(e -> root.setCenter(dashboardPanel.getView()));
         btnTasks.setOnAction(e -> root.setCenter(taskPanel.getView()));
 

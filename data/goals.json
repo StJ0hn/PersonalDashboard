@@ -9,6 +9,11 @@
         "durationInMinutes": 100,
         "date": "2026-07-12",
         "notes": ""
+      },
+      {
+        "durationInMinutes": 100,
+        "date": "2026-07-14",
+        "notes": "Everthing"
       }
     ]
   },
@@ -22,6 +27,24 @@
         "durationInMinutes": 100,
         "date": "2026-07-12",
         "notes": ""
+      },
+      {
+        "durationInMinutes": 10,
+        "date": "2026-07-14",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "title": "TEESST",
+    "areaOfKnowledge": "Tests",
+    "targetMinutes": 600,
+    "deadline": "2026-07-31",
+    "historyOfSessions": [
+      {
+        "durationInMinutes": 60,
+        "date": "2026-07-14",
+        "notes": "Somethings"
       }
     ]
   }
