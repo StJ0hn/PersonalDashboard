@@ -1,18 +1,1 @@
-[
-  {
-    "title": "Test",
-    "description": "",
-    "taskStatus": "PENDING",
-    "taskPriority": "MEDIUM",
-    "category": "Tests",
-    "dueDate": "2029-09-09"
-  },
-  {
-    "title": "Test 3",
-    "description": "",
-    "taskStatus": "PENDING",
-    "taskPriority": "MEDIUM",
-    "category": "Tests",
-    "dueDate": "2029-09-09"
-  }
-]
+[]

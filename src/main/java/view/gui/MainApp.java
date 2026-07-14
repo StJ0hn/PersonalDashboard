@@ -17,12 +17,15 @@ public class MainApp extends Application {
     private TaskController taskController;
     private GoalController goalController;
     private DashboardController dashboardController;
+    private TaskPanel taskPanel;
+
 
     @Override
     public void init() {
         taskController = new TaskController();
         goalController = new GoalController();
         dashboardController = new DashboardController();
+        taskPanel = new TaskPanel(taskController);
     }
 
     @Override
@@ -50,6 +53,7 @@ public class MainApp extends Application {
         root.setCenter(dashboardPanel.getView());
 
         btnDashboard.setOnAction(e -> root.setCenter(dashboardPanel.getView()));
+        btnTasks.setOnAction(e -> root.setCenter(taskPanel.getView()));
 
         Scene scene = new Scene(root, 1024, 640);
         primaryStage.setTitle("Personal Dashboard");
