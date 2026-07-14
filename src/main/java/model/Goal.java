@@ -57,7 +57,8 @@ public class Goal {
 
     public double getProgressPercentage() {
         if (targetMinutes == 0) return 0.0;
-        return ((double) getAccumulatedMinutes() / targetMinutes) * 100.0;
+        double percentage = ((double) getAccumulatedMinutes() / targetMinutes) * 100;
+        return Math.min(100.0, percentage);
     }
 
     @Override

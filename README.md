@@ -40,7 +40,7 @@ git clone https://github.com/StJ0hn/personal-dashboard.git
 2. Acesse a pasta do projeto e abra em sua IDE de preferência (ex: IntelliJ IDEA).
 
 3. Compile e execute a classe principal:
-Main.java (A rotina de execução via terminal será atualizada para Maven/Gradle conforme a inserção do JavaFX).
+view.cli.Main.java (A rotina de execução via terminal será atualizada para Maven/Gradle conforme a inserção do JavaFX).
 
 ## Desafios Técnicos e Aprendizados
 1. Projetar Casos de usos e fluxos alternativos de interação com o Menu
